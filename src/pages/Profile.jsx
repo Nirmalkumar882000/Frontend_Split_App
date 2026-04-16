@@ -5,7 +5,7 @@ import { useToast } from '../context/ToastContext';
 import { useTheme } from '../context/ThemeContext';
 import api from '../utils/api';
 import { motion } from 'framer-motion';
-import { Camera, User, Mail, Save, ArrowLeft, Loader2, Lock } from 'lucide-react';
+import { Camera, User, Mail, Save, ArrowLeft, Loader2, Lock, Eye, EyeOff } from 'lucide-react';
 
 const Profile = () => {
     const { user, updateUser } = useAuth();
@@ -32,6 +32,9 @@ const Profile = () => {
     const [newPassword, setNewPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [isChangingPassword, setIsChangingPassword] = useState(false);
+    const [showCurrentPassword, setShowCurrentPassword] = useState(false);
+    const [showNewPassword, setShowNewPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
     const handleImageChange = (e) => {
         const file = e.target.files[0];
@@ -193,28 +196,32 @@ const Profile = () => {
 
                             <form onSubmit={handleSubmit} className="space-y-8">
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                                    <div className="space-y-3">
-                                        <label className="text-[10px] font-black uppercase tracking-[0.2em] text-[var(--text-muted)] ml-1">Legal Designation</label>
+                                    <div className="space-y-3.5">
+                                        <label className="text-[11px] font-black uppercase tracking-[0.25em] text-slate-200 ml-0.5 opacity-90 block">
+                                            Legal Designation
+                                        </label>
                                         <div className="relative group">
                                             <input
                                                 type="text"
                                                 value={name}
                                                 onChange={(e) => setName(e.target.value)}
-                                                className="input-field m-0 h-16 px-6 rounded-2xl bg-white/5 dark:bg-slate-950 border-slate-200 dark:border-white/10 transition-all focus:ring-2 focus:ring-indigo-500/20 w-full"
+                                                className="w-full h-15 px-6 rounded-2xl bg-slate-950/60 dark:bg-slate-950/70 border border-slate-200/10 dark:border-white/5 text-[var(--text-main)] font-semibold transition-all focus:border-indigo-500/50 focus:ring-4 focus:ring-indigo-500/10 outline-none placeholder:text-slate-600"
                                                 placeholder="Nirmal Kumar"
                                                 required
                                             />
                                         </div>
                                     </div>
 
-                                    <div className="space-y-3">
-                                        <label className="text-[10px] font-black uppercase tracking-[0.2em] text-[var(--text-muted)] ml-1">Communication Channel</label>
+                                    <div className="space-y-3.5">
+                                        <label className="text-[11px] font-black uppercase tracking-[0.25em] text-slate-200 ml-0.5 opacity-90 block">
+                                            Communication Channel
+                                        </label>
                                         <div className="relative group">
                                             <input
                                                 type="email"
                                                 value={email}
                                                 onChange={(e) => setEmail(e.target.value)}
-                                                className="input-field m-0 h-16 px-6 rounded-2xl bg-white/5 dark:bg-slate-950 border-slate-200 dark:border-white/10 transition-all focus:ring-2 focus:ring-purple-500/20 w-full"
+                                                className="w-full h-15 px-6 rounded-2xl bg-slate-950/60 dark:bg-slate-950/70 border border-slate-200/10 dark:border-white/5 text-[var(--text-main)] font-semibold transition-all focus:border-purple-500/50 focus:ring-4 focus:ring-purple-500/10 outline-none placeholder:text-slate-600"
                                                 placeholder="gateway@proxy.com"
                                                 required
                                             />
@@ -253,49 +260,82 @@ const Profile = () => {
                             </div>
 
                             <form onSubmit={handlePasswordChange} className="space-y-8">
-                                <div className="space-y-3">
-                                    <label className="text-[10px] font-black uppercase tracking-[0.2em] text-[var(--text-muted)] ml-1">Current Validation Key</label>
-                                    <input
-                                        type="password"
-                                        value={currentPassword}
-                                        onChange={(e) => setCurrentPassword(e.target.value)}
-                                        className="input-field h-14 rounded-2xl bg-white/5 dark:bg-slate-900 border-slate-200 dark:border-white/10"
-                                        placeholder="••••••••••••"
-                                        required
-                                    />
+                                <div className="space-y-3.5">
+                                    <label className="text-[11px] font-black uppercase tracking-[0.25em] text-slate-200 ml-0.5 opacity-90 block">
+                                        Current Validation Key
+                                    </label>
+                                    <div className="relative group">
+                                        <input
+                                            type={showCurrentPassword ? "text" : "password"}
+                                            value={currentPassword}
+                                            onChange={(e) => setCurrentPassword(e.target.value)}
+                                            className="w-full h-15 px-6 rounded-2xl bg-slate-950/60 dark:bg-slate-950/70 border border-slate-200/10 dark:border-white/5 text-[var(--text-main)] font-semibold transition-all focus:border-purple-500/50 focus:ring-4 focus:ring-purple-500/10 outline-none placeholder:text-slate-600"
+                                            placeholder="••••••••••••"
+                                            required
+                                        />
+                                        <button
+                                            type="button"
+                                            onClick={() => setShowCurrentPassword(!showCurrentPassword)}
+                                            className="absolute right-5 top-1/2 -translate-y-1/2 text-slate-500 hover:text-purple-400 transition-colors"
+                                        >
+                                            {showCurrentPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                                        </button>
+                                    </div>
                                 </div>
 
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                                    <div className="space-y-3">
-                                        <label className="text-[10px] font-black uppercase tracking-[0.2em] text-[var(--text-muted)] ml-1">New Access Key</label>
-                                        <input
-                                            type="password"
-                                            value={newPassword}
-                                            onChange={(e) => setNewPassword(e.target.value)}
-                                            className="input-field h-14 rounded-2xl bg-white/5 dark:bg-slate-900 border-slate-200 dark:border-white/10"
-                                            placeholder="••••••••••••"
-                                            required
-                                        />
+                                    <div className="space-y-3.5">
+                                        <label className="text-[11px] font-black uppercase tracking-[0.25em] text-slate-200 ml-0.5 opacity-90 block">
+                                            New Access Key
+                                        </label>
+                                        <div className="relative group">
+                                            <input
+                                                type={showNewPassword ? "text" : "password"}
+                                                value={newPassword}
+                                                onChange={(e) => setNewPassword(e.target.value)}
+                                                className="w-full h-15 px-6 rounded-2xl bg-slate-950/60 dark:bg-slate-950/70 border border-slate-200/10 dark:border-white/5 text-[var(--text-main)] font-semibold transition-all focus:border-purple-500/50 focus:ring-4 focus:ring-purple-500/10 outline-none placeholder:text-slate-600"
+                                                placeholder="••••••••••••"
+                                                required
+                                            />
+                                            <button
+                                                type="button"
+                                                onClick={() => setShowNewPassword(!showNewPassword)}
+                                                className="absolute right-5 top-1/2 -translate-y-1/2 text-slate-500 hover:text-purple-400 transition-colors"
+                                            >
+                                                {showNewPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                                            </button>
+                                        </div>
                                     </div>
-                                    <div className="space-y-3">
-                                        <label className="text-[10px] font-black uppercase tracking-[0.2em] text-[var(--text-muted)] ml-1">Confirm New Key</label>
-                                        <input
-                                            type="password"
-                                            value={confirmPassword}
-                                            onChange={(e) => setConfirmPassword(e.target.value)}
-                                            className="input-field h-14 rounded-2xl bg-white/5 dark:bg-slate-900 border-slate-200 dark:border-white/10"
-                                            placeholder="••••••••••••"
-                                            required
-                                        />
+                                    <div className="space-y-3.5">
+                                        <label className="text-[11px] font-black uppercase tracking-[0.25em] text-slate-200 ml-0.5 opacity-90 block">
+                                            Confirm New Key
+                                        </label>
+                                        <div className="relative group">
+                                            <input
+                                                type={showConfirmPassword ? "text" : "password"}
+                                                value={confirmPassword}
+                                                onChange={(e) => setConfirmPassword(e.target.value)}
+                                                className="w-full h-15 px-6 rounded-2xl bg-slate-950/60 dark:bg-slate-950/70 border border-slate-200/10 dark:border-white/5 text-[var(--text-main)] font-semibold transition-all focus:border-purple-500/50 focus:ring-4 focus:ring-purple-500/10 outline-none placeholder:text-slate-600"
+                                                placeholder="••••••••••••"
+                                                required
+                                            />
+                                            <button
+                                                type="button"
+                                                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                                                className="absolute right-5 top-1/2 -translate-y-1/2 text-slate-500 hover:text-purple-400 transition-colors"
+                                            >
+                                                {showConfirmPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
 
                                 <motion.button
-                                    whileHover={{ scale: 1.02 }}
+                                    whileHover={{ scale: 1.02, boxShadow: '0 20px 40px -15px rgba(168, 85, 247, 0.4)' }}
                                     whileTap={{ scale: 0.98 }}
                                     disabled={isChangingPassword}
                                     type="submit"
-                                    className="w-full py-5 rounded-2xl bg-white dark:bg-slate-800 text-purple-500 border-2 border-purple-500/20 flex items-center justify-center gap-3 text-sm font-black uppercase tracking-widest hover:bg-purple-600 hover:text-white hover:border-purple-600 transition-all shadow-xl"
+                                    className="btn w-full py-5 rounded-2xl bg-gradient-to-r from-purple-600 to-indigo-600 text-white flex items-center justify-center gap-3 text-sm font-black uppercase tracking-widest shadow-xl transition-all"
                                 >
                                     {isChangingPassword ? <Loader2 className="animate-spin" /> : <Lock size={18} />}
                                     {isChangingPassword ? 'Re-encrypting...' : 'Override Access Key'}

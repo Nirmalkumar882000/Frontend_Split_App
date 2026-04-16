@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import api from '../utils/api';
 import { useAuth } from '../context/AuthContext';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Plus, Users, LogOut, LayoutDashboard, Sun, Moon, TrendingUp, User, X, ArrowRight, Lock } from 'lucide-react';
+import { Plus, Users, LogOut, LayoutDashboard, Sun, Moon, TrendingUp, User, X, ArrowRight, Lock, ChevronDown } from 'lucide-react';
 import { io } from 'socket.io-client';
 import { useTheme } from '../context/ThemeContext';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, Legend } from 'recharts';
@@ -27,6 +27,7 @@ const Dashboard = () => {
     const [totalGroups, setTotalGroups] = useState(0);
     const [totalPages, setTotalPages] = useState(1);
     const [showProfileDropdown, setShowProfileDropdown] = useState(false);
+    const [showItemsDropdown, setShowItemsDropdown] = useState(false);
 
     useEffect(() => {
         fetchGroups();
@@ -240,60 +241,96 @@ const Dashboard = () => {
             </nav>
 
             <main className="container mx-auto px-4 py-4 max-w-7xl">
-                <div className="flex flex-col xl:flex-row justify-between items-start xl:items-center gap-8 mb-12">
-                    <div className="flex flex-col md:flex-row items-start md:items-center gap-6 w-full xl:w-auto">
-                        <h2 className="flex items-center gap-3 text-2xl font-bold m-0 whitespace-nowrap">
-                            <LayoutDashboard size={28} className="text-indigo-400" /> Your Groups
-                        </h2>
+                <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-8 mb-12">
+                    <div className="flex flex-col md:flex-row items-start md:items-center gap-6 w-full lg:w-auto">
+                        <motion.div initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} className="flex items-center gap-4">
+                            <div className="p-2.5 rounded-xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 shrink-0">
+                                <LayoutDashboard size={24} strokeWidth={2.5} />
+                            </div>
+                            <h2 className="text-2xl md:text-3xl font-black m-0 tracking-tight text-[var(--text-main)] whitespace-nowrap">
+                                Your Groups
+                            </h2>
+                        </motion.div>
 
-                        <div className="flex items-center gap-3 w-full md:w-auto flex-1">
-                            <div className="relative group flex-1 md:w-72">
+                        <div className="flex items-center gap-3 w-full md:w-auto md:min-w-[400px] h-12">
+                            <div className="relative group flex-1 h-full">
                                 <input
                                     type="text"
                                     placeholder="Search groups..."
-                                    className="w-full h-12 pl-11 pr-12 rounded-xl bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-white/10 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 transition-all outline-none text-sm font-semibold shadow-sm"
+                                    className="w-full h-full pl-11 pr-4 rounded-xl bg-white/5 dark:bg-slate-900/40 border border-slate-200/50 dark:border-white/10 focus:border-indigo-500/50 focus:ring-4 focus:ring-indigo-500/10 transition-all outline-none text-sm font-bold shadow-sm backdrop-blur-md"
                                     value={searchTerm}
                                     onChange={(e) => { setSearchTerm(e.target.value); setCurrentPage(1); }}
                                 />
-                                <div className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-indigo-400 transition-colors">
-                                    <Users size={18} />
+                                <div className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500/70 group-focus-within:text-indigo-400 transition-colors">
+                                    <Users size={18} strokeWidth={2.5} />
                                 </div>
                                 <AnimatePresence>
                                     {searchTerm && (
                                         <motion.button
-                                            initial={{ opacity: 0, scale: 0.8 }}
-                                            animate={{ opacity: 1, scale: 1 }}
-                                            exit={{ opacity: 0, scale: 0.8 }}
+                                            initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.8 }}
                                             onClick={() => { setSearchTerm(''); setCurrentPage(1); }}
-                                            className="absolute right-3 top-1/2 -translate-y-1/2 w-7 h-7 flex items-center justify-center rounded-lg bg-slate-100 dark:bg-white/5 text-slate-400 hover:text-rose-500 transition-all"
+                                            className="absolute right-3 top-1/2 -translate-y-1/2 w-6 h-6 flex items-center justify-center rounded-lg bg-slate-100 dark:bg-white/10 text-slate-400 hover:text-rose-500 transition-all"
                                         >
-                                            <X size={14} />
+                                            <X size={14} strokeWidth={3} />
                                         </motion.button>
                                     )}
                                 </AnimatePresence>
                             </div>
-                            <div className="flex items-center gap-2">
-                                <select
-                                    className="h-12 px-3 rounded-xl bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-white/10 focus:border-indigo-500 outline-none text-sm font-bold cursor-pointer transition-all shadow-sm"
-                                    value={itemsPerPage}
-                                    onChange={(e) => { setItemsPerPage(Number(e.target.value)); setCurrentPage(1); }}
+
+                            <div className="relative h-full shrink-0">
+                                <motion.div
+                                    whileTap={{ scale: 0.95 }}
+                                    onClick={() => setShowItemsDropdown(!showItemsDropdown)}
+                                    className="h-full px-5 pr-10 rounded-xl bg-white/5 dark:bg-slate-900/40 border border-slate-200/50 dark:border-white/10 flex items-center justify-center text-sm font-black cursor-pointer transition-all shadow-sm backdrop-blur-md min-w-[80px]"
                                 >
-                                    <option value={6}>6</option>
-                                    <option value={12}>12</option>
-                                    <option value={24}>24</option>
-                                    <option value={48}>48</option>
-                                </select>
+                                    {itemsPerPage}
+                                    <div className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500">
+                                        <motion.div
+                                            animate={{ rotate: showItemsDropdown ? 180 : 0 }}
+                                            transition={{ duration: 0.2 }}
+                                        >
+                                            <ChevronDown size={16} strokeWidth={3} />
+                                        </motion.div>
+                                    </div>
+                                </motion.div>
+
+                                <AnimatePresence>
+                                    {showItemsDropdown && (
+                                        <>
+                                            <div className="fixed inset-0 z-[100]" onClick={() => setShowItemsDropdown(false)} />
+                                            <motion.div
+                                                initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                                                animate={{ opacity: 1, y: 0, scale: 1 }}
+                                                exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                                                className="absolute right-0 top-full mt-2 w-full min-w-[80px] py-1.5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 rounded-xl shadow-2xl z-[101] overflow-hidden backdrop-blur-xl"
+                                            >
+                                                {[6, 12, 24, 48].map((num) => (
+                                                    <button
+                                                        key={num}
+                                                        onClick={() => { setItemsPerPage(num); setCurrentPage(1); setShowItemsDropdown(false); }}
+                                                        className={`w-full px-4 py-2.5 text-sm font-black transition-all text-center ${itemsPerPage === num ? 'bg-indigo-500 text-white' : 'text-[var(--text-muted)] hover:bg-indigo-500/10 hover:text-indigo-500'}`}
+                                                    >
+                                                        {num}
+                                                    </button>
+                                                ))}
+                                            </motion.div>
+                                        </>
+                                    )}
+                                </AnimatePresence>
                             </div>
                         </div>
                     </div>
 
                     <motion.button
-                        whileHover={{ scale: 1.02, y: -2 }}
+                        whileHover={{ scale: 1.02, y: -2, boxShadow: '0 20px 40px -15px rgba(99, 102, 241, 0.5)' }}
                         whileTap={{ scale: 0.98 }}
                         onClick={() => setShowModal(true)}
-                        className="h-12 px-8 flex items-center gap-2 rounded-xl bg-gradient-to-br from-indigo-600 to-violet-700 hover:from-indigo-500 hover:to-violet-600 text-white font-bold transition-all shadow-[0_8px_25px_-8px_rgba(79,70,229,0.6)] w-full xl:w-auto justify-center"
+                        className="h-12 px-8 flex items-center gap-3 rounded-xl bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-600 text-white font-black text-sm tracking-tight transition-all shadow-lg w-full lg:w-auto justify-center group shrink-0"
                     >
-                        <Plus size={20} className="stroke-[3]" /> Create New Group
+                        <div className="p-1 rounded-lg bg-white/20 group-hover:bg-white/30 transition-colors">
+                            <Plus size={16} strokeWidth={3} />
+                        </div>
+                        <span className="whitespace-nowrap">Create New Group</span>
                     </motion.button>
                 </div>
 
