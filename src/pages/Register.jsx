@@ -34,7 +34,7 @@ const Register = () => {
                 backgroundPosition: 'center',
             }}
         >
-            <div className="absolute inset-0 bg-slate-950/80 dark:bg-[#020617]/90 backdrop-blur-sm z-0"></div>
+            <div className="absolute inset-0 bg-slate-950/90 backdrop-blur-md z-0"></div>
             <div className="absolute inset-0 z-0">
                 <ParticlesBackground />
             </div>
@@ -43,19 +43,19 @@ const Register = () => {
                 initial={{ opacity: 0, y: 20, scale: 0.95 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 transition={{ duration: 0.5 }}
-                className="glass-card glow-indigo w-full max-w-[420px] relative z-10 m-5 p-8 md:p-10"
+                className="w-full max-w-[420px] relative z-10 m-5 p-8 md:p-10 rounded-[2.5rem] border border-white/10 bg-slate-900/60 backdrop-blur-xl shadow-2xl"
             >
                 <div className="text-center mb-10">
                     <motion.div initial={{ y: -10 }} animate={{ y: 0 }} className="mb-6 flex justify-center">
                         <img src="/logo.png" alt="Splits Logo" className="w-20 h-20 object-cover rounded-[1.5rem] shadow-2xl shadow-indigo-500/30 ring-2 ring-indigo-500/20" />
                     </motion.div>
                     <h1 className="text-gradient text-4xl font-black mb-2 tracking-tight">Join Splits</h1>
-                    <p className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-widest mt-1.5 opacity-60">Initiate Operational Status</p>
+                    <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mt-1.5">Initiate Operational Status</p>
                 </div>
 
                 <form onSubmit={handleSubmit} className="space-y-6">
                     <div className="space-y-3.5">
-                        <label className="text-[11px] font-black uppercase tracking-[0.25em] text-[var(--text-muted)] dark:text-slate-200 ml-0.5 opacity-90 block">
+                        <label className="text-[11px] font-black uppercase tracking-[0.25em] text-slate-300 ml-0.5 opacity-90 block">
                             Name
                         </label>
                         <div className="relative group">
@@ -63,7 +63,7 @@ const Register = () => {
                                 type="text"
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
-                                className="w-full h-14 md:h-15 px-6 rounded-2xl bg-white/5 dark:bg-slate-950/70 border border-slate-200/50 dark:border-white/5 text-[var(--text-main)] font-semibold transition-all focus:border-indigo-500/50 focus:ring-4 focus:ring-indigo-500/10 outline-none placeholder:text-slate-400 dark:placeholder:text-slate-600 shadow-sm backdrop-blur-md"
+                                className="w-full h-14 md:h-15 px-6 rounded-2xl bg-white/5 border border-white/10 text-white font-semibold transition-all focus:border-indigo-500/50 focus:ring-4 focus:ring-indigo-500/10 outline-none placeholder:text-slate-500 shadow-sm"
                                 placeholder="John Doe"
                                 required
                             />
@@ -71,7 +71,7 @@ const Register = () => {
                     </div>
 
                     <div className="space-y-3.5">
-                        <label className="text-[11px] font-black uppercase tracking-[0.25em] text-[var(--text-muted)] dark:text-slate-200 ml-0.5 opacity-90 block">
+                        <label className="text-[11px] font-black uppercase tracking-[0.25em] text-slate-300 ml-0.5 opacity-90 block">
                             Email Address
                         </label>
                         <div className="relative group">
@@ -79,7 +79,7 @@ const Register = () => {
                                 type="email"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
-                                className="w-full h-14 md:h-15 px-6 rounded-2xl bg-white/5 dark:bg-slate-950/70 border border-slate-200/50 dark:border-white/5 text-[var(--text-main)] font-semibold transition-all focus:border-purple-500/50 focus:ring-4 focus:ring-purple-500/10 outline-none placeholder:text-slate-400 dark:placeholder:text-slate-600 shadow-sm backdrop-blur-md"
+                                className="w-full h-14 md:h-15 px-6 rounded-2xl bg-white/5 border border-white/10 text-white font-semibold transition-all focus:border-purple-500/50 focus:ring-4 focus:ring-purple-500/10 outline-none placeholder:text-slate-500 shadow-sm"
                                 placeholder="gateway@proxy.com"
                                 required
                             />
@@ -87,7 +87,7 @@ const Register = () => {
                     </div>
 
                     <div className="space-y-3.5">
-                        <label className="text-[11px] font-black uppercase tracking-[0.25em] text-[var(--text-muted)] dark:text-slate-200 ml-0.5 opacity-90 block">
+                        <label className="text-[11px] font-black uppercase tracking-[0.25em] text-slate-300 ml-0.5 opacity-90 block">
                             Password
                         </label>
                         <div className="relative group">
@@ -95,14 +95,14 @@ const Register = () => {
                                 type={showPassword ? "text" : "password"}
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
-                                className="w-full h-14 md:h-15 px-6 rounded-2xl bg-white/5 dark:bg-slate-950/70 border border-slate-200/50 dark:border-white/5 text-[var(--text-main)] font-semibold transition-all focus:border-indigo-500/50 focus:ring-4 focus:ring-indigo-500/10 outline-none placeholder:text-slate-400 dark:placeholder:text-slate-600 shadow-sm backdrop-blur-md"
+                                className="w-full h-14 md:h-15 px-6 rounded-2xl bg-white/5 border border-white/10 text-white font-semibold transition-all focus:border-indigo-500/50 focus:ring-4 focus:ring-indigo-500/10 outline-none placeholder:text-slate-500 shadow-sm"
                                 placeholder="••••••••••••"
                                 required
                             />
                             <button
                                 type="button"
                                 onClick={() => setShowPassword(!showPassword)}
-                                className="absolute right-5 top-1/2 -translate-y-1/2 text-slate-500 hover:text-indigo-500 transition-colors"
+                                className="absolute right-5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-indigo-400 transition-colors"
                             >
                                 {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                             </button>
@@ -115,12 +115,12 @@ const Register = () => {
                         type="submit"
                         className="w-full py-4 md:py-5 mt-4 rounded-2xl bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-600 text-white flex items-center justify-center gap-3 text-sm font-black uppercase tracking-widest shadow-xl transition-all"
                     >
-                        <UserPlus size={18} />
+                        <UserPlus size={18} className="text-white" />
                         Register
                     </motion.button>
                 </form>
 
-                <p className="mt-8 text-center text-[var(--text-muted)] text-sm font-semibold">
+                <p className="mt-8 text-center text-slate-400 text-sm font-semibold">
                     Already an operative? <Link to="/login" className="text-indigo-500 hover:text-purple-400 font-black transition-colors uppercase tracking-wider text-xs ml-1">Login</Link>
                 </p>
             </motion.div>

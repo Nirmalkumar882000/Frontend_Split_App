@@ -433,7 +433,7 @@ const GroupDetails = () => {
                             onClick={() => setShowExpenseModal(true)}
                             className="h-14 px-8 flex items-center gap-3 rounded-2xl bg-gradient-to-br from-indigo-600 to-violet-700 hover:from-indigo-500 hover:to-violet-600 text-white font-black transition-all shadow-[0_10px_30px_-10px_rgba(79,70,229,0.5)] justify-center whitespace-nowrap"
                         >
-                            <Plus size={22} className="stroke-[3]" /> NEW EXPENSE
+                            <Plus size={22} className="stroke-[3] text-white" /> NEW EXPENSE
                         </motion.button>
                     </div>
                 </div>
@@ -475,7 +475,7 @@ const GroupDetails = () => {
                                 >
                                     <div className="flex items-center gap-5 w-full sm:w-auto">
                                         <div className={`w-12 h-12 rounded-xl flex items-center justify-center shadow-inner ${exp.description.startsWith('Settlement:') ? 'bg-indigo-500/10 text-indigo-400' : 'bg-slate-50 dark:bg-slate-800 text-indigo-500'}`}>
-                                            {exp.description.startsWith('Settlement:') ? <Check size={22} /> : <Receipt size={22} />}
+                                            {exp.description.startsWith('Settlement:') ? <Check size={22} className="text-indigo-400" /> : <Receipt size={22} className="text-indigo-500" />}
                                         </div>
                                         <div>
                                             <div className={`text-lg font-bold tracking-tight mb-0.5 ${exp.description.startsWith('Settlement:') ? 'text-indigo-400 italic' : 'text-[var(--text-main)]'}`}>{exp.description}</div>
@@ -728,7 +728,7 @@ const GroupDetails = () => {
                                 onClick={() => setShowChat(false)}
                                 className="w-10 h-10 flex items-center justify-center rounded-xl hover:bg-rose-500/10 hover:text-rose-500 transition-all text-slate-400"
                             >
-                                <Plus size={24} style={{ transform: 'rotate(45deg)' }} />
+                                <Plus size={24} style={{ transform: 'rotate(45deg)' }} className="text-slate-400" />
                             </button>
                         </div>
 

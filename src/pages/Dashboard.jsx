@@ -245,7 +245,7 @@ const Dashboard = () => {
                     <div className="flex flex-col md:flex-row items-start md:items-center gap-6 w-full lg:w-auto">
                         <motion.div initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} className="flex items-center gap-4">
                             <div className="p-2.5 rounded-xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 shrink-0">
-                                <LayoutDashboard size={24} strokeWidth={2.5} />
+                                <LayoutDashboard size={24} strokeWidth={2.5} className="text-indigo-400" />
                             </div>
                             <h2 className="text-2xl md:text-3xl font-black m-0 tracking-tight text-[var(--text-main)] whitespace-nowrap">
                                 Your Groups
@@ -356,7 +356,7 @@ const Dashboard = () => {
 
                                 <div className="flex items-center gap-5 mb-8">
                                     <div className="bg-gradient-to-br from-indigo-500 to-violet-600 p-3.5 rounded-2xl text-white shadow-lg group-hover:scale-110 transition-transform relative">
-                                        <Users size={24} />
+                                        <Users size={24} className="text-white" />
                                         {group.unreadCount > 0 && (
                                             <motion.span
                                                 initial={{ scale: 0 }} animate={{ scale: 1 }}
@@ -443,7 +443,7 @@ const Dashboard = () => {
                     <div className="glass-card glow-indigo lg:col-span-2">
                         <div className="flex items-center gap-3 mb-6">
                             <div className="bg-indigo-500/20 text-indigo-400 p-2.5 rounded-xl border border-indigo-500/30">
-                                <TrendingUp size={24} />
+                                <TrendingUp size={24} className="text-indigo-400" />
                             </div>
                             <div>
                                 <h2 className="text-xl font-bold m-0 text-[var(--text-main)]">Expense History</h2>
@@ -475,7 +475,7 @@ const Dashboard = () => {
                     <div className="glass-card glow-purple">
                         <div className="flex items-center gap-3 mb-6">
                             <div className="bg-purple-500/20 text-purple-400 p-2.5 rounded-xl border border-purple-500/30">
-                                <LayoutDashboard size={24} />
+                                <LayoutDashboard size={24} className="text-purple-400" />
                             </div>
                             <div>
                                 <h2 className="text-xl font-bold m-0 text-[var(--text-main)]">Categories</h2>

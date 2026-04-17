@@ -135,7 +135,7 @@ html.dark .glow-rose {
 
 .btn-primary {
   background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
-  color: var(--text-main);
+  color: #ffffff;
   box-shadow: 0 4px 12px var(--primary-glow);
 }
 

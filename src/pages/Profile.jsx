@@ -157,11 +157,11 @@ const Profile = () => {
                                         onClick={() => fileInputRef.current.click()}
                                         className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center text-white backdrop-blur-sm"
                                     >
-                                        <Camera size={28} />
+                                        <Camera size={28} className="text-white" />
                                     </button>
                                 </motion.div>
                                 <div className="absolute -bottom-1 -right-1 w-11 h-11 rounded-2xl bg-indigo-600 flex items-center justify-center text-white shadow-xl border-4 border-white dark:border-[#0f172a]">
-                                    <Camera size={18} />
+                                    <Camera size={18} className="text-white" />
                                 </div>
                             </div>
 
@@ -186,7 +186,7 @@ const Profile = () => {
                         >
                             <div className="flex items-center gap-4 mb-10">
                                 <div className="p-3.5 rounded-2xl bg-indigo-500/10 text-indigo-400">
-                                    <User size={24} />
+                                    <User size={24} className="text-indigo-400" />
                                 </div>
                                 <div>
                                     <h2 className="text-2xl font-black text-[var(--text-main)] leading-none">Identity</h2>
@@ -197,7 +197,7 @@ const Profile = () => {
                             <form onSubmit={handleSubmit} className="space-y-8">
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                                     <div className="space-y-3.5">
-                                        <label className="text-[11px] font-black uppercase tracking-[0.25em] text-slate-200 ml-0.5 opacity-90 block">
+                                        <label className="text-[11px] font-black uppercase tracking-[0.25em] text-slate-500 dark:text-slate-400 ml-0.5 opacity-90 block">
                                             Name
                                         </label>
                                         <div className="relative group">
@@ -205,7 +205,7 @@ const Profile = () => {
                                                 type="text"
                                                 value={name}
                                                 onChange={(e) => setName(e.target.value)}
-                                                className="w-full h-15 px-6 rounded-2xl bg-slate-950/60 dark:bg-slate-950/70 border border-slate-200/10 dark:border-white/5 text-[var(--text-main)] font-semibold transition-all focus:border-indigo-500/50 focus:ring-4 focus:ring-indigo-500/10 outline-none placeholder:text-slate-600"
+                                                className="w-full h-15 px-6 rounded-2xl bg-white dark:bg-slate-950/70 border border-slate-200 dark:border-white/5 text-[var(--text-main)] font-semibold transition-all focus:border-indigo-500/50 focus:ring-4 focus:ring-indigo-500/10 outline-none placeholder:text-slate-400 dark:placeholder:text-slate-600"
                                                 placeholder="Nirmal Kumar"
                                                 required
                                             />
@@ -213,7 +213,7 @@ const Profile = () => {
                                     </div>
 
                                     <div className="space-y-3.5">
-                                        <label className="text-[11px] font-black uppercase tracking-[0.25em] text-slate-200 ml-0.5 opacity-90 block">
+                                        <label className="text-[11px] font-black uppercase tracking-[0.25em] text-slate-500 dark:text-slate-400 ml-0.5 opacity-90 block">
                                             Email Address
                                         </label>
                                         <div className="relative group">
@@ -221,7 +221,7 @@ const Profile = () => {
                                                 type="email"
                                                 value={email}
                                                 onChange={(e) => setEmail(e.target.value)}
-                                                className="w-full h-15 px-6 rounded-2xl bg-slate-950/60 dark:bg-slate-950/70 border border-slate-200/10 dark:border-white/5 text-[var(--text-main)] font-semibold transition-all focus:border-purple-500/50 focus:ring-4 focus:ring-purple-500/10 outline-none placeholder:text-slate-600"
+                                                className="w-full h-15 px-6 rounded-2xl bg-white dark:bg-slate-950/70 border border-slate-200 dark:border-white/5 text-[var(--text-main)] font-semibold transition-all focus:border-purple-500/50 focus:ring-4 focus:ring-purple-500/10 outline-none placeholder:text-slate-400 dark:placeholder:text-slate-600"
                                                 placeholder="gateway@proxy.com"
                                                 required
                                             />
@@ -236,7 +236,7 @@ const Profile = () => {
                                     type="submit"
                                     className="btn btn-primary w-full py-5 flex items-center justify-center gap-3 text-lg font-black uppercase tracking-widest shadow-[0_20px_40px_-15px_rgba(99,102,241,0.5)]"
                                 >
-                                    {isSaving ? <Loader2 className="animate-spin" /> : <Save size={20} />}
+                                    {isSaving ? <Loader2 className="animate-spin text-white" /> : <Save size={20} className="text-white" />}
                                     {isSaving ? 'Syncing...' : 'Update Records'}
                                 </motion.button>
                             </form>
@@ -251,7 +251,7 @@ const Profile = () => {
                         >
                             <div className="flex items-center gap-4 mb-10">
                                 <div className="p-3 rounded-2xl bg-purple-500/10 text-purple-400">
-                                    <Lock size={24} />
+                                    <Lock size={24} className="text-purple-400" />
                                 </div>
                                 <div>
                                     <h2 className="text-2xl font-black text-[var(--text-main)] leading-none">Security Encryption</h2>
@@ -261,7 +261,7 @@ const Profile = () => {
 
                             <form onSubmit={handlePasswordChange} className="space-y-8">
                                 <div className="space-y-3.5">
-                                    <label className="text-[11px] font-black uppercase tracking-[0.25em] text-slate-200 ml-0.5 opacity-90 block">
+                                    <label className="text-[11px] font-black uppercase tracking-[0.25em] text-slate-500 dark:text-slate-400 ml-0.5 opacity-90 block">
                                         Current Validation Key
                                     </label>
                                     <div className="relative group">
@@ -269,7 +269,7 @@ const Profile = () => {
                                             type={showCurrentPassword ? "text" : "password"}
                                             value={currentPassword}
                                             onChange={(e) => setCurrentPassword(e.target.value)}
-                                            className="w-full h-15 px-6 rounded-2xl bg-slate-950/60 dark:bg-slate-950/70 border border-slate-200/10 dark:border-white/5 text-[var(--text-main)] font-semibold transition-all focus:border-purple-500/50 focus:ring-4 focus:ring-purple-500/10 outline-none placeholder:text-slate-600"
+                                            className="w-full h-15 px-6 rounded-2xl bg-white dark:bg-slate-950/70 border border-slate-200 dark:border-white/5 text-[var(--text-main)] font-semibold transition-all focus:border-purple-500/50 focus:ring-4 focus:ring-purple-500/10 outline-none placeholder:text-slate-400 dark:placeholder:text-slate-600"
                                             placeholder="••••••••••••"
                                             required
                                         />
@@ -285,7 +285,7 @@ const Profile = () => {
 
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                                     <div className="space-y-3.5">
-                                        <label className="text-[11px] font-black uppercase tracking-[0.25em] text-slate-200 ml-0.5 opacity-90 block">
+                                        <label className="text-[11px] font-black uppercase tracking-[0.25em] text-slate-500 dark:text-slate-400 ml-0.5 opacity-90 block">
                                             New Access Key
                                         </label>
                                         <div className="relative group">
@@ -293,7 +293,7 @@ const Profile = () => {
                                                 type={showNewPassword ? "text" : "password"}
                                                 value={newPassword}
                                                 onChange={(e) => setNewPassword(e.target.value)}
-                                                className="w-full h-15 px-6 rounded-2xl bg-slate-950/60 dark:bg-slate-950/70 border border-slate-200/10 dark:border-white/5 text-[var(--text-main)] font-semibold transition-all focus:border-purple-500/50 focus:ring-4 focus:ring-purple-500/10 outline-none placeholder:text-slate-600"
+                                                className="w-full h-15 px-6 rounded-2xl bg-white dark:bg-slate-950/70 border border-slate-200 dark:border-white/5 text-[var(--text-main)] font-semibold transition-all focus:border-purple-500/50 focus:ring-4 focus:ring-purple-500/10 outline-none placeholder:text-slate-400 dark:placeholder:text-slate-600"
                                                 placeholder="••••••••••••"
                                                 required
                                             />
@@ -307,7 +307,7 @@ const Profile = () => {
                                         </div>
                                     </div>
                                     <div className="space-y-3.5">
-                                        <label className="text-[11px] font-black uppercase tracking-[0.25em] text-slate-200 ml-0.5 opacity-90 block">
+                                        <label className="text-[11px] font-black uppercase tracking-[0.25em] text-slate-500 dark:text-slate-400 ml-0.5 opacity-90 block">
                                             Confirm New Key
                                         </label>
                                         <div className="relative group">
@@ -315,7 +315,7 @@ const Profile = () => {
                                                 type={showConfirmPassword ? "text" : "password"}
                                                 value={confirmPassword}
                                                 onChange={(e) => setConfirmPassword(e.target.value)}
-                                                className="w-full h-15 px-6 rounded-2xl bg-slate-950/60 dark:bg-slate-950/70 border border-slate-200/10 dark:border-white/5 text-[var(--text-main)] font-semibold transition-all focus:border-purple-500/50 focus:ring-4 focus:ring-purple-500/10 outline-none placeholder:text-slate-600"
+                                                className="w-full h-15 px-6 rounded-2xl bg-white dark:bg-slate-950/70 border border-slate-200 dark:border-white/5 text-[var(--text-main)] font-semibold transition-all focus:border-purple-500/50 focus:ring-4 focus:ring-purple-500/10 outline-none placeholder:text-slate-400 dark:placeholder:text-slate-600"
                                                 placeholder="••••••••••••"
                                                 required
                                             />
@@ -337,7 +337,7 @@ const Profile = () => {
                                     type="submit"
                                     className="btn w-full py-5 rounded-2xl bg-gradient-to-r from-purple-600 to-indigo-600 text-white flex items-center justify-center gap-3 text-sm font-black uppercase tracking-widest shadow-xl transition-all"
                                 >
-                                    {isChangingPassword ? <Loader2 className="animate-spin" /> : <Lock size={18} />}
+                                    {isChangingPassword ? <Loader2 className="animate-spin text-white" /> : <Lock size={18} className="text-white" />}
                                     {isChangingPassword ? 'Re-encrypting...' : 'Override Access Key'}
                                 </motion.button>
                             </form>
