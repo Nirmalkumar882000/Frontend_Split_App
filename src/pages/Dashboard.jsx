@@ -41,7 +41,7 @@ const Dashboard = () => {
         };
         loadInitialData();
 
-        const socket = io('http://localhost:5000');
+        const socket = io(import.meta.env.VITE_SOCKET_URL || 'http://localhost:5000');
         if (user?.id) {
             socket.emit('joinUserRoom', user.id);
         }
@@ -149,7 +149,7 @@ const Dashboard = () => {
             <nav className="sticky top-0 z-[100] w-full bg-[var(--bg-dark)]/80 backdrop-blur-xl border-b border-[var(--border)] mb-8">
                 <div className="container mx-auto px-4 max-w-7xl h-20 md:h-24 flex flex-col md:flex-row justify-between items-center gap-4">
                     <motion.div initial={{ x: -20, opacity: 0 }} animate={{ x: 0, opacity: 1 }} className="flex items-center gap-4">
-                        <img src="/favicon.png" alt="Splits Logo" className="w-10 h-10 object-contain shadow-2xl rounded-2xl ring-1 ring-indigo-500/20 shadow-indigo-500/10" />
+                        <img src="/logo.png" alt="Splits Logo" className="w-10 h-10 object-cover shadow-2xl rounded-xl ring-1 ring-indigo-500/20 shadow-indigo-500/10" />
                         <div>
                             <h1 className="text-3xl md:text-4xl font-black tracking-tighter text-gradient m-0" style={{ lineHeight: '1' }}>Splits</h1>
                             <p className="text-[var(--text-muted)] text-[10px] uppercase font-black tracking-widest mt-1 opacity-60">Financial Intelligence Hub</p>
@@ -451,7 +451,7 @@ const Dashboard = () => {
                             </div>
                         </div>
                         <div className="h-[300px] w-full">
-                            <ResponsiveContainer width="100%" height="100%">
+                            <ResponsiveContainer width="100%" height="100%" minWidth={0}>
                                 <AreaChart data={chartData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
                                     <defs>
                                         <linearGradient id="colorExpenses" x1="0" y1="0" x2="0" y2="1">
@@ -483,7 +483,7 @@ const Dashboard = () => {
                             </div>
                         </div>
                         <div className="h-[300px] w-full flex items-center justify-center">
-                            <ResponsiveContainer width="100%" height="100%">
+                            <ResponsiveContainer width="100%" height="100%" minWidth={0}>
                                 <PieChart>
                                     <Pie data={pieData} cx="50%" cy="45%" innerRadius={70} outerRadius={90} paddingAngle={5} dataKey="value" stroke="none">
                                         {pieData.map((entry, index) => <Cell key={`cell-${index}`} fill={PIE_COLORS[index % PIE_COLORS.length]} />)}

@@ -7,6 +7,7 @@ import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
 import GroupDetails from './pages/GroupDetails';
 import Profile from './pages/Profile';
+import NotFound from './pages/NotFound';
 
 
 const PrivateRoute = ({ children }) => {
@@ -39,7 +40,7 @@ function App() {
                                     <Profile />
                                 </PrivateRoute>
                             } />
-
+                            <Route path="*" element={<NotFound />} />
                         </Routes>
                     </Router>
                 </AuthProvider>

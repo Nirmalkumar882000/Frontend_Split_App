@@ -167,7 +167,7 @@ const Profile = () => {
 
                             <h2 className="text-2xl font-black text-[var(--text-main)] truncate px-2">{name || 'User'}</h2>
                             <p className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-widest mt-2 opacity-60">Verified Member</p>
-                            
+
                             <input
                                 type="file"
                                 ref={fileInputRef}
@@ -198,7 +198,7 @@ const Profile = () => {
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                                     <div className="space-y-3.5">
                                         <label className="text-[11px] font-black uppercase tracking-[0.25em] text-slate-200 ml-0.5 opacity-90 block">
-                                            Legal Designation
+                                            Name
                                         </label>
                                         <div className="relative group">
                                             <input
@@ -214,7 +214,7 @@ const Profile = () => {
 
                                     <div className="space-y-3.5">
                                         <label className="text-[11px] font-black uppercase tracking-[0.25em] text-slate-200 ml-0.5 opacity-90 block">
-                                            Communication Channel
+                                            Email Address
                                         </label>
                                         <div className="relative group">
                                             <input

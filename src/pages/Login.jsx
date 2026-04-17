@@ -4,7 +4,7 @@ import api from '../utils/api';
 import { useAuth } from '../context/AuthContext';
 import { useToast } from '../context/ToastContext';
 import { motion } from 'framer-motion';
-import { Eye, EyeOff } from 'lucide-react';
+import { LogIn, Eye, EyeOff } from 'lucide-react';
 import ParticlesBackground from '../components/ParticlesBackground';
 
 const Login = () => {
@@ -29,97 +29,86 @@ const Login = () => {
     };
 
     return (
-        <div style={{
-            position: 'relative',
-            width: '100%',
-            minHeight: '100vh',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            overflow: 'hidden'
-        }}>
-            <ParticlesBackground />
+        <div
+            className="relative w-full min-h-screen flex justify-center items-center overflow-hidden transition-colors duration-500"
+            style={{
+                backgroundImage: 'url("https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?auto=format&fit=crop&q=80&w=2000")',
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+            }}
+        >
+            <div className="absolute inset-0 bg-slate-950/80 dark:bg-[#020617]/90 backdrop-blur-sm z-0"></div>
+            <div className="absolute inset-0 z-0">
+                <ParticlesBackground />
+            </div>
 
             <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
+                initial={{ opacity: 0, y: 20, scale: 0.95 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
                 transition={{ duration: 0.5 }}
-                className="glass-card"
-                style={{
-                    width: '90%',
-                    maxWidth: '420px',
-                    position: 'relative',
-                    zIndex: 1,
-                    margin: '20px'
-                }}
+                className="glass-card glow-indigo w-full max-w-[420px] relative z-10 m-5 p-8 md:p-10"
             >
-                <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
+                <div className="text-center mb-10">
                     <motion.div initial={{ y: -10 }} animate={{ y: 0 }} className="mb-6 flex justify-center">
-                        <img src="/favicon.png" alt="Splits Logo" className="w-20 h-20 object-contain rounded-[2rem] shadow-2xl shadow-indigo-500/20 ring-1 ring-indigo-500/30" />
+                        <img src="/logo.png" alt="Splits Logo" className="w-20 h-20 object-cover rounded-[1.5rem] shadow-2xl shadow-indigo-500/30 ring-2 ring-indigo-500/20" />
                     </motion.div>
-                    <h1 className="text-gradient" style={{ fontSize: '2.5rem', marginBottom: '0.5rem' }}>Sign In to Splits</h1>
-                    <p style={{ color: 'var(--text-muted)', fontSize: '1rem' }}>Your high-fidelity expense hub</p>
+                    <h1 className="text-gradient text-4xl font-black mb-2 tracking-tight">Sign In to Splits</h1>
+                    <p className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-widest mt-1.5 opacity-60">High-Fidelity Expense Hub</p>
                 </div>
 
-                <form onSubmit={handleSubmit}>
-                    <div style={{ marginBottom: '1.25rem' }}>
-                        <label style={{ fontSize: '0.85rem', color: 'var(--text-muted)', display: 'block', marginBottom: '8px', marginLeft: '4px' }}>Email Address</label>
-                        <input
-                            type="email"
-                            className="input-field"
-                            placeholder="name@company.com"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            required
-                        />
+                <form onSubmit={handleSubmit} className="space-y-6">
+                    <div className="space-y-3.5">
+                        <label className="text-[11px] font-black uppercase tracking-[0.25em] text-[var(--text-muted)] dark:text-slate-200 ml-0.5 opacity-90 block">
+                            Email Address
+                        </label>
+                        <div className="relative group">
+                            <input
+                                type="email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                className="w-full h-14 md:h-15 px-6 rounded-2xl bg-white/5 dark:bg-slate-950/70 border border-slate-200/50 dark:border-white/5 text-[var(--text-main)] font-semibold transition-all focus:border-indigo-500/50 focus:ring-4 focus:ring-indigo-500/10 outline-none placeholder:text-slate-400 dark:placeholder:text-slate-600 shadow-sm backdrop-blur-md"
+                                placeholder="gateway@proxy.com"
+                                required
+                            />
+                        </div>
                     </div>
-                    <div style={{ marginBottom: '2rem' }}>
-                        <label style={{ fontSize: '0.85rem', color: 'var(--text-muted)', display: 'block', marginBottom: '8px', marginLeft: '4px' }}>Password</label>
-                        <div style={{ position: 'relative' }}>
+
+                    <div className="space-y-3.5">
+                        <label className="text-[11px] font-black uppercase tracking-[0.25em] text-[var(--text-muted)] dark:text-slate-200 ml-0.5 opacity-90 block">
+                            Password
+                        </label>
+                        <div className="relative group">
                             <input
                                 type={showPassword ? "text" : "password"}
-                                className="input-field"
-                                placeholder="••••••••"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
+                                className="w-full h-14 md:h-15 px-6 rounded-2xl bg-white/5 dark:bg-slate-950/70 border border-slate-200/50 dark:border-white/5 text-[var(--text-main)] font-semibold transition-all focus:border-indigo-500/50 focus:ring-4 focus:ring-indigo-500/10 outline-none placeholder:text-slate-400 dark:placeholder:text-slate-600 shadow-sm backdrop-blur-md"
+                                placeholder="••••••••••••"
                                 required
-                                style={{ paddingRight: '3.5rem' }}
                             />
                             <button
                                 type="button"
                                 onClick={() => setShowPassword(!showPassword)}
-                                style={{
-                                    position: 'absolute',
-                                    right: '12px',
-                                    top: '50%',
-                                    transform: 'translateY(-50%)',
-                                    background: 'none',
-                                    border: 'none',
-                                    color: 'var(--text-muted)',
-                                    cursor: 'pointer',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    padding: '8px',
-                                    marginTop: '-10px'
-                                }}
+                                className="absolute right-5 top-1/2 -translate-y-1/2 text-slate-500 hover:text-indigo-500 transition-colors"
                             >
-                                {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                                {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                             </button>
                         </div>
                     </div>
+
                     <motion.button
-                        whileHover={{ scale: 1.02, boxShadow: '0 0 20px var(--primary-glow)' }}
+                        whileHover={{ scale: 1.02, boxShadow: '0 20px 40px -15px rgba(99, 102, 241, 0.5)' }}
                         whileTap={{ scale: 0.98 }}
                         type="submit"
-                        className="btn btn-primary"
-                        style={{ width: '100%', fontSize: '1rem', padding: '1rem', borderRadius: '14px' }}
+                        className="w-full py-4 md:py-5 mt-4 rounded-2xl bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-600 text-white flex items-center justify-center gap-3 text-sm font-black uppercase tracking-widest shadow-xl transition-all"
                     >
-                        Sign In
+                        <LogIn size={18} />
+                        Login
                     </motion.button>
                 </form>
 
-                <p style={{ marginTop: '2rem', textAlign: 'center', color: 'var(--text-muted)', fontSize: '0.95rem' }}>
-                    New here? <Link to="/register" style={{ color: 'var(--primary)', fontWeight: '600', textDecoration: 'none' }}>Create an account</Link>
+                <p className="mt-8 text-center text-[var(--text-muted)] text-sm font-semibold">
+                    New operative? <Link to="/register" className="text-indigo-500 hover:text-purple-400 font-black transition-colors uppercase tracking-wider text-xs ml-1">Register</Link>
                 </p>
             </motion.div>
         </div>
